@@ -1,3 +1,10 @@
+<!-- =============================================================
+     🛍️ K-BEAUTICS TELEGRAM SHOP  (for customers)
+     Upload this file to GitHub repo:  kbeautics-shop
+     Link: https://sinsamorn05-code.github.io/kbeautics-shop/
+     Server function: Supabase Edge Function "hyper-handler"
+     ❌ Do NOT upload to kbeautics-shop-admin (that is the admin)
+     ============================================================= -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -579,8 +586,10 @@ function cats(){
     <div class="cwrap">
       <div class="side">
         <a class="${CATSEL==='featured'?'on':''}" onclick="CATSEL='featured';render()">Featured</a>
-        <a class="${CATSEL==='pre'?'on':''}" onclick="CATSEL='pre';render()">Pre-order / Custom Brand</a>
-        ${cs.map(c=>`<a class="${CATSEL===c.id?'on':''}" onclick="CATSEL=${c.id};render();window.scrollTo(0,0)">${esc(c.name)}</a>`).join('')}
+        ${(() => { const pre = `<a class="${CATSEL==='pre'?'on':''}" onclick="CATSEL='pre';render()">Pre-order / Custom Brand</a>`;
+          const items = cs.map(c=>`<a class="${CATSEL===c.id?'on':''}" onclick="CATSEL=${c.id};render();window.scrollTo(0,0)">${esc(c.name)}</a>`);
+          const at = Math.max(0, Math.min(items.length, Number(S.settings.preorder_sort)||0));
+          items.splice(at, 0, pre); return items.join(''); })()}
       </div>
       <div class="cmain">${top}
         <div class="small muted">${list.length} product${list.length===1?'':'s'}</div>
