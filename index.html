@@ -235,7 +235,7 @@ s{color:var(--muted);font-size:12px}
 .fbar .r{margin-left:auto;font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}
 .pinfo{background:#fff;padding:14px;margin-bottom:10px}
 .pinfo .price{font-size:26px}
-.askp{font-size:14px;font-weight:700;color:var(--red)}
+.askp{font-size:14px;font-weight:700;color:var(--red);white-space:nowrap}
 .pinfo .askp{font-size:22px}
 .pinfo .disc2{background:var(--redsoft);color:var(--red);font-weight:700;font-size:13px;border-radius:6px;padding:2px 7px;margin-left:6px}
 .pinfo h1{font-size:18px;margin:10px 0 6px;line-height:1.4;font-weight:600}
@@ -407,13 +407,8 @@ const soldTxt = n => n < 10 ? `${n}` : `${Math.floor(n/10)*10}+`;
 const isOut = p => false;   // no stock control — customers can always order
 const noPrice = p => !(price(p) > 0);   // price not set yet (0) → customer taps "Ask price" instead of buying
 const priceHtml = p => noPrice(p) ? '<span class="askp">Ask price</span>' : money(price(p));
-async function askPrice(id){
-  const p = prod(id); if (!p) return;
-  if (!(await new Promise(ok => { try { tg.showConfirm('Ask us the price of this product?', ok); } catch(_){ ok(confirm('Ask us the price of this product?')); } }))) return;
-  try { await api('request', { type:'preorder', url: img0(p), note: 'Price for: ' + p.name + ' (product #' + p.id + ')', qty: 1, images: [] });
-    haptic('success'); toast("Sent! We'll reply with the price soon"); await loadMy(); }
-  catch(e){ toast(String(e.message || e)); }
-}
+const NP_TXT = '<span class="askp">Price on Telegram</span>';
+const lineMoney = (unit, qty) => Number(unit) > 0 ? money(unit*qty) : NP_TXT;
 const prod = id => S.products.find(p => p.id === +id);
 const img0 = p => p?.images?.[0] || '';
 function parts(ms){ ms = Math.max(0, ms); const s = Math.floor(ms/1000); return [Math.floor(s/86400), Math.floor(s%86400/3600), Math.floor(s%3600/60), s%60].map(x => String(x).padStart(2,'0')); }
@@ -431,11 +426,10 @@ setInterval(() => {
 
 // ====== CART & WISHLIST ======
 function saveCart(){ store.set('kt_cart', cart); drawBadges(); }
-function cartLines(){ return Object.entries(cart).map(([id,qty]) => ({ p: prod(id), qty })).filter(l => l.p && l.qty > 0 && !noPrice(l.p)); }
+function cartLines(){ return Object.entries(cart).map(([id,qty]) => ({ p: prod(id), qty })).filter(l => l.p && l.qty > 0); }
 function drawBadges(){ const n = cartLines().reduce((s,l)=>s+l.qty,0); const el=$('#cartN'); el.textContent=n; el.classList.toggle('hidden', !n); }
 function addToCart(id, qty=1, silent){
   const p = prod(id); if (!p) return false;
-  if (noPrice(p)){ askPrice(id); return false; }
   const n = (cart[id]||0) + qty;
   cart[id] = Math.min(n, 999); saveCart(); haptic('success');
   if (!silent) toast('Added to cart');
@@ -470,7 +464,7 @@ const topbar = title => `<div class="tbar"><button class="bk" onclick="back()">$
 
 // ====== CARDS ======
 function heartBtn(p){ return `<button class="heart ${wish.has(p.id)?'on':''}" onclick="event.stopPropagation();toggleWish(${p.id},this)">${ic('heart')}</button>`; }
-function cartBtn(p){ if (noPrice(p)) return `<button class="cbtn" onclick="event.stopPropagation();askPrice(${p.id})" aria-label="Ask price">${ic('chat')}</button>`; return `<button class="cbtn" onclick="event.stopPropagation();addToCart(${p.id})" ${isOut(p)?'disabled style="opacity:.35"':''}>${ic('cart')}</button>`; }
+function cartBtn(p){ return `<button class="cbtn" onclick="event.stopPropagation();addToCart(${p.id})" ${isOut(p)?'disabled style="opacity:.35"':''}>${ic('cart')}</button>`; }
 function tagFor(p){ return p.is_preorder ? '<span class="ptag pre">Pre-order</span>' : isOut(p) ? '<span class="ptag out">Sold out</span>' : ''; }
 function pcard(p){
   const w = was(p), o = off(p);
@@ -649,12 +643,13 @@ function productView({ id }){
       <h1>${esc(p.name)}</h1>
       <div class="small muted">${p.sold?`${soldTxt(p.sold)} sold · `:''}${p.is_preorder?'Pre-order':'<span style="color:var(--green)">Available to order</span>'}</div>
     </div>
+    ${noPrice(p)?`<div class="wrap"><div class="note">💬 <b>Price on Telegram</b><br>Choose your quantity and place the order. We'll message you on Telegram with the price — you pay only after you agree.</div></div>`:''}
     ${p.is_preorder?`<div class="wrap"><div class="note">${ic('box','display:inline;vertical-align:-5px;width:18px;color:var(--o3)')} <b>Pre-order</b><br>
       Pay ${dep}% deposit now (${money(r2(price(p)*dep/100))} each), the rest when it arrives in Cambodia.${p.eta_days?`<br>Arrives in about <b>${p.eta_days} days</b>.`:''}</div></div>`:''}
     <div class="wrap">
       <div class="card" style="display:flex;justify-content:space-between;align-items:center">
         <div><div class="small muted">Delivery</div><b>${fee?money(fee):'Free'}</b></div>
-        ${!isOut(p)&&!noPrice(p)?`<div><div class="small muted" style="text-align:right;margin-bottom:4px">Quantity</div><div class="stp"><button id="qm">${ic('minus')}</button><span id="qn">1</span><button id="qp">${ic('plus')}</button></div></div>`:''}
+        ${!isOut(p)?`<div><div class="small muted" style="text-align:right;margin-bottom:4px">Quantity</div><div class="stp"><button id="qm">${ic('minus')}</button><span id="qn">1</span><button id="qp">${ic('plus')}</button></div></div>`:''}
       </div>
       ${p.description?`<div class="card"><b>Description</b><p style="white-space:pre-line;line-height:1.6;margin:8px 0 0">${esc(p.description)}</p></div>`:''}
       ${rel.length?`<div class="titleline">You may also like</div><div class="grid">${rel.map(pcard).join('')}</div>`:''}
@@ -663,13 +658,12 @@ function productView({ id }){
     <div class="botbar">
       <button class="ib ${wish.has(p.id)?'on':''}" onclick="toggleWish(${p.id},this)">${ic('heart')}Save</button>
       <button class="ib" onclick="setTab('cart')">${ic('cart')}Cart${nCart?`<span class="n">${nCart}</span>`:''}</button>
-      ${noPrice(p)?`<button class="btn pri" id="askp" style="flex:2">💬 Ask price</button>`:isOut(p)?'<button class="btn block" disabled style="flex:2">Sold out</button>':`
+      ${isOut(p)?'<button class="btn block" disabled style="flex:2">Sold out</button>':`
       <button class="btn out" id="addc">Add to cart</button>
       <button class="btn pri" id="buyn">Buy now</button>`}
     </div>`;
   const g = $('#gal');
   if (imgs.length > 1) g.onscroll = () => { $('#gcnt').textContent = `${Math.round(g.scrollLeft/g.clientWidth)+1}/${imgs.length}`; };
-  if (noPrice(p)){ $('#askp').onclick = () => askPrice(p.id); return; }
   if (isOut(p)) return;
   const max = 999;
   $('#qm').onclick = () => { qty = Math.max(1, qty-1); $('#qn').textContent = qty; };
@@ -694,13 +688,13 @@ function cartTab(){
         <div class="th" style="background-image:url('${esc(img0(l.p))}')" onclick="go('product',{id:${l.p.id}})"></div>
         <div class="inf"><div class="nm">${esc(l.p.name)}</div>
           ${l.p.is_preorder?`<div class="st pre">● Pre-order${l.p.eta_days?` · ~${l.p.eta_days} days`:''}</div>`:''}
-          <div class="row"><div><div class="price">${money(price(l.p)*l.qty)}</div><div class="small muted">${money(price(l.p))} × ${l.qty}</div></div>
+          <div class="row"><div><div class="price">${lineMoney(price(l.p), l.qty)}</div><div class="small muted">${noPrice(l.p)?'':money(price(l.p))+' × '}${noPrice(l.p)?'Qty '+l.qty:l.qty}</div></div>
             <div class="stp"><button class="${l.qty===1?'del':''}" onclick="chg(${l.p.id},-1)">${ic(l.qty===1?'trash':'minus')}</button><span>${l.qty}</span><button onclick="chg(${l.p.id},1)">${ic('plus')}</button></div></div>
         </div></div>`).join('')}
       ${both?`<div class="note" style="margin-bottom:0">Your cart will become <b>2 orders</b>: normal items are delivered first, pre-order items when they arrive.</div>`:''}
     </div>`}
     ${like.length?`<div class="wrap"><div class="titleline">${ic('spark','color:var(--o2);fill:var(--o2);width:18px')} You May Also Like</div><div class="grid">${like.map(pcard).join('')}</div></div>`:''}
-    ${lines.length?`<div class="checkbar"><div class="tot">${money(total)}</div><button class="btn pri" onclick="go('checkout')">Checkout (${n})</button></div>`:''}`;
+    ${lines.length?`<div class="checkbar"><div class="tot">${lines.some(l=>noPrice(l.p))?(total>0?money(total)+' <span class="small muted">+ price on Telegram</span>':'<span class="askp">Price on Telegram</span>'):money(total)}</div><button class="btn pri" onclick="go('checkout')">Checkout (${n})</button></div>`:''}`;
   if (lines.length) $('#view').classList.add('has-checkbar');
 }
 function chg(id, d){
@@ -718,7 +712,7 @@ function checkoutView(){
   const sub = ls => r2(ls.reduce((s,l)=>s+price(l.p)*l.qty,0));
   const dep = r2(pre.reduce((s,l)=>s+price(l.p)*l.qty*(l.p.deposit_percent ?? S.settings.default_deposit_percent)/100,0));
   const payNow = r2((stock.length ? sub(stock) + fee : 0) + (pre.length ? dep : 0));
-  const c = S.customer;
+  const c = S.customer, hasNP = lines.some(l => noPrice(l.p));
   $('#view').innerHTML = topbar('Checkout') + `<div class="wrap" style="padding-top:12px">
     <div class="card">
       <b style="display:flex;align-items:center;gap:6px">${ic('pin','width:18px;color:var(--o2)')} Delivery details</b>
@@ -729,9 +723,9 @@ function checkoutView(){
     </div>
     <div class="card">
       <b>Items (${lines.reduce((s,l)=>s+l.qty,0)})</b>
-      ${lines.map(l=>`<div class="oitem"><div class="th" style="background-image:url('${esc(img0(l.p))}')"></div><div style="flex:1;min-width:0"><div class="nm" style="min-height:0;font-size:14px">${esc(l.p.name)}</div><div class="small muted">${l.p.is_preorder?'Pre-order · ':''}${money(price(l.p))} × ${l.qty}</div></div><b>${money(price(l.p)*l.qty)}</b></div>`).join('')}
+      ${lines.map(l=>`<div class="oitem"><div class="th" style="background-image:url('${esc(img0(l.p))}')"></div><div style="flex:1;min-width:0"><div class="nm" style="min-height:0;font-size:14px">${esc(l.p.name)}</div><div class="small muted">${l.p.is_preorder?'Pre-order · ':''}${noPrice(l.p)?'Qty '+l.qty:money(price(l.p))+' × '+l.qty}</div></div><b>${lineMoney(price(l.p), l.qty)}</b></div>`).join('')}
     </div>
-    <div class="card sum">
+    ${hasNP?`<div class="card"><b>💬 Price on Telegram</b><p class="small" style="margin:6px 0 0;line-height:1.5">Some items don't show a price yet. Place your order now — we'll message you on Telegram with the final price. <b>You pay only after you agree.</b></p></div>`:`<div class="card sum">
       ${stock.length?`<div><span>Items</span><span>${money(sub(stock))}</span></div>`:''}
       ${pre.length?`<div><span>Pre-order items</span><span>${money(sub(pre))}</span></div>`:''}
       ${fee?`<div><span>Delivery${stock.length&&pre.length?' (per order)':''}</span><span>${money(fee)}</span></div>`:''}
@@ -739,14 +733,15 @@ function checkoutView(){
       <div class="t"><span>Pay now</span><span style="color:var(--red)">${money(payNow)}</span></div>
       ${pre.length?`<div class="muted small"><span>Pay when pre-order arrives</span><span>${money(sub(pre)+fee-dep)}</span></div>`:''}
       <div class="small muted" style="margin-top:6px">Payment by bank transfer / QR. You'll upload your slip after placing the order.</div>
-    </div>
+    </div>`}
     <p id="cErr" class="err small"></p><div style="height:70px"></div></div>
-    <div class="botbar"><div style="flex:1"><div class="small muted">Pay now</div><div class="price" style="font-size:22px">${money(payNow)}</div></div>
+    <div class="botbar"><div style="flex:1">${hasNP?'<div class="small muted">Price</div><div class="askp">On Telegram</div>':`<div class="small muted">Pay now</div><div class="price" style="font-size:22px">${money(payNow)}</div>`}</div>
       <button class="btn pri" id="place" style="flex:1.4">Place order</button></div>`;
   $('#place').onclick = placeOrder;
 }
 async function placeOrder(){
   const b = $('#place'); b.disabled = true; b.textContent = 'Placing…'; $('#cErr').textContent = '';
+  const npOrder = cartLines().some(l => noPrice(l.p));
   try {
     const r = await api('place_order', {
       items: cartLines().map(l => ({ product_id: l.p.id, qty: l.qty })),
@@ -759,7 +754,7 @@ async function placeOrder(){
     sheet(`<div style="text-align:center"><div style="width:64px;height:64px;border-radius:50%;background:#e6f6ea;color:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto">${ic('check','width:36px;height:36px')}</div>
       <h2 style="margin:10px 0 6px">Order placed!</h2>
       <p>${r.orders.map(o=>`<b>${esc(o.order_no)}</b> — ${TYPE[o.order_type]}`).join('<br>')}</p>
-      <p class="muted">Next: pay and send us your payment slip.</p>
+      <p class="muted">${npOrder?"We'll message you on Telegram with the price. You pay after you agree.":'Next: pay and send us your payment slip.'}</p>
       <button class="btn pri block" onclick="closeSheet()">OK</button></div>`);
   } catch(e){
     $('#cErr').textContent = e.message; haptic('error'); toast(e.message);
@@ -834,18 +829,20 @@ async function ordersView({ g='all' }){
 function orderCard(o){
   const pays = (o.payments||[]).sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
   const lastRej = pays[0]?.status === 'rejected' ? pays[0] : null;
-  const canPay = ['pending_payment','arrived'].includes(o.status);
+  const needPrice = (o.order_items||[]).some(i => !(Number(i.unit_price_usd) > 0)) && o.status === 'pending_payment';
+  const canPay = ['pending_payment','arrived'].includes(o.status) && !needPrice;
   const d = due(o);
   return `<div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center"><b>${esc(o.order_no)}</b><span class="badge s-${o.status}">${esc(STATUS[o.status]||o.status)}</span></div>
     <div class="small muted" style="margin:2px 0 6px">${TYPE[o.order_type]} · ${dt(o.created_at)}</div>
     ${(o.order_items||[]).map(i=>`<div class="oitem"><div class="th" style="background-image:url('${esc(img0(prod(i.product_id)))}')"></div>
-      <div style="flex:1;min-width:0"><div class="nm" style="min-height:0;font-size:14px">${esc(i.product_name)}</div><div class="small muted">${money(i.unit_price_usd)} × ${i.qty}</div></div><b>${money(i.line_total_usd)}</b></div>`).join('')}
+      <div style="flex:1;min-width:0"><div class="nm" style="min-height:0;font-size:14px">${esc(i.product_name)}</div><div class="small muted">${Number(i.unit_price_usd)>0?money(i.unit_price_usd)+' × '+i.qty:'Qty '+i.qty}</div></div><b>${lineMoney(i.unit_price_usd, i.qty)}</b></div>`).join('')}
     <div class="sum small" style="margin-top:6px;border-top:1px solid var(--line);padding-top:6px">
       ${+o.delivery_fee_usd?`<div><span>Delivery</span><span>${money(o.delivery_fee_usd)}</span></div>`:''}
-      <div><b>Total</b><b>${money(o.total_usd)}</b></div>
+      <div><b>Total</b><b>${needPrice?NP_TXT:money(o.total_usd)}</b></div>
       ${+o.paid_usd?`<div><span>Paid</span><span>${money(o.paid_usd)}</span></div>`:''}
     </div>
+    ${needPrice?`<div class="note" style="margin-top:10px">⏳ <b>Waiting for price</b> — we'll message you on Telegram. After you agree, the total shows here and you can pay.</div>`:''}
     ${lastRej && canPay?`<div class="note err">Your last payment slip was not accepted${lastRej.reject_reason?': '+esc(lastRej.reject_reason):''}. Please send it again.</div>`:''}
     ${canPay?`<button class="btn pri block" style="margin-top:10px" onclick="paySheet(${o.id})">Pay ${d.kind==='deposit'?'deposit ':d.kind==='balance'?'balance ':''}${money(d.amount)}</button>`:''}
     ${o.status==='pending_payment' && +o.paid_usd===0?`<div style="text-align:center;margin-top:10px"><span class="small muted" style="cursor:pointer;text-decoration:underline" onclick="cancelOrder(${o.id},'${esc(o.order_no)}')">Cancel order</span></div>`:''}
