@@ -108,6 +108,8 @@ s{color:var(--muted);font-size:12px}
 .ptag.out{background:rgba(0,0,0,.6)}
 .bd{padding:8px 10px 10px;display:flex;flex-direction:column;flex:1}
 .nm{font-size:14px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
+.hbtn.lbtn{width:auto;padding:0 10px;font-size:13px;font-weight:600;border-radius:99px}
+.pnote{font-size:10.5px;line-height:1.25;color:var(--muted);margin-bottom:2px;margin-top:auto;padding-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.pnote.big{font-size:13px;margin-bottom:2px;max-width:none;white-space:normal}
 .prow{display:flex;align-items:flex-end;justify-content:space-between;gap:6px;margin-top:auto;padding-top:6px}
 .price{color:var(--red);font-weight:700;font-size:17px;line-height:1.1}
 .cbtn{width:40px;height:30px;border-radius:99px;border:1.5px solid var(--text);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -131,8 +133,8 @@ s{color:var(--muted);font-size:12px}
 /* ---------- category shortcuts ---------- */
 .shortcuts{display:flex;gap:6px;justify-content:space-between;margin:14px 0 4px;overflow-x:auto;scrollbar-width:none}
 .shortcuts::-webkit-scrollbar{display:none}
-.shortcuts .circ{flex:1 0 64px;min-width:64px;max-width:84px}
-.shortcuts .cim{width:52px;height:52px}
+.shortcuts .circ{flex:1 0 56px;min-width:56px;max-width:76px}
+.shortcuts .cim{width:42px;height:42px}
 .shortcuts b{font-size:11px;font-weight:600;color:#4a4a52;line-height:1.25;word-break:normal;overflow-wrap:normal;hyphens:auto}
 /* ---------- request type choice ---------- */
 .rtype{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
@@ -163,11 +165,11 @@ s{color:var(--muted);font-size:12px}
 .side a{display:block;padding:18px 6px;text-align:center;font-size:13.5px;word-break:break-word;color:#555;cursor:pointer;line-height:1.3;border-left:3px solid transparent}
 .side a.on{background:#fff;color:var(--o3);font-weight:700;border-left-color:var(--o2)}
 .cmain{flex:1;min-width:0;padding:12px 10px;background:#fff;min-height:calc(100vh - 190px)}
-.circles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 8px;margin-bottom:12px}
+.circles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 4px;margin-bottom:12px}
 .circ{text-align:center;cursor:pointer}
-.circ .cim{width:64px;height:64px;border-radius:50%;margin:0 auto 6px;background:linear-gradient(160deg,#f3a9bf,#e07a9b) center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.circ b{font-size:13px;display:block;line-height:1.25}
-.circ span{font-size:12px;color:var(--muted)}
+.circ .cim{width:46px;height:46px;border-radius:50%;margin:0 auto 6px;background:linear-gradient(160deg,#f3a9bf,#e07a9b) center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.circ b{font-size:11.5px;font-weight:600;display:block;line-height:1.2}
+.circ span{font-size:11px;color:var(--muted)}
 .sortrow{display:flex;align-items:center;justify-content:space-between;margin:8px 0 10px}
 .sortrow h4{margin:0;font-size:16px}
 .sortrow select{border:0;background:#fbe9ef;border-radius:99px;padding:8px 12px;font-weight:600;font-size:14px;max-width:150px}
@@ -292,6 +294,73 @@ nav.bn .n{position:absolute;top:-3px;right:10px;background:var(--red);color:#fff
 <div id="sheet" class="hidden"><div class="box" id="sbox"></div></div>
 <div id="toast" class="hidden"></div>
 
+<script id="i18n">/*I18N-START — languages: English / ខ្មែរ / 中文. The words are in the I18N list below. */
+const I18N = {"km":{"Home":"ទំព័រដើម","Categories":"ប្រភេទ","Me":"ខ្ញុំ","Cart":"កន្ត្រក","Your Beauty, Your Confidence":"សម្រស់របស់អ្នក ទំនុកចិត្តរបស់អ្នក","Find products":"ស្វែងរកទំនិញ","Search products":"ស្វែងរកទំនិញ","All":"ទាំងអស់","OK":"យល់ព្រម","Save":"រក្សាទុក","Copy":"ចម្លង","Copied":"បានចម្លង","Total":"សរុប","Price":"តម្លៃ","Phone":"លេខទូរស័ព្ទ","Address":"អាសយដ្ឋាន","Description":"ការពិពណ៌នា","Quantity":"ចំនួន","Delivery":"ដឹកជញ្ជូន","Free":"ឥតគិតថ្លៃ","New":"ថ្មី","View All":"មើលទាំងអស់","View All ›":"មើលទាំងអស់ ›","Shop more →":"ទិញបន្ថែម →","Start shopping":"ចាប់ផ្តើមទិញ","Language":"ភាសា","Choose language":"ជ្រើសរើសភាសា","Flash Sale":"លក់ពិសេស","Ends in":"បញ្ចប់ក្នុង","Ends {0} Oct, {1}:{2}":"បញ្ចប់ {0} តុលា ម៉ោង {1}:{2}","Best Sellers":"លក់ដាច់បំផុត","New Arrivals":"ទំនិញមកដល់ថ្មី","Just for you":"សម្រាប់អ្នក","Recommended For You":"ណែនាំសម្រាប់អ្នក","Popular categories":"ប្រភេទពេញនិយម","Featured":"ពិសេស","All products":"ទំនិញទាំងអស់","Pre-order products":"ទំនិញកម្ម៉ង់ទុកមុន","{0} product":"ទំនិញ {0}","{0} products":"ទំនិញ {0}","{0} result":"លទ្ធផល {0}","{0} sold":"លក់បាន {0}","{0}+ sold":"លក់បាន {0}+","{0}+ sold ·":"លក់បាន {0}+ ·","{0} sold · Pre-order":"លក់បាន {0} · កម្ម៉ង់ទុកមុន","Relevance":"ពាក់ព័ន្ធ","Best selling":"លក់ដាច់បំផុត","Newest":"ថ្មីបំផុត","Price: low to high":"តម្លៃ៖ ទាបទៅខ្ពស់","Price: high to low":"តម្លៃ៖ ខ្ពស់ទៅទាប","Sold out":"អស់ស្តុក","Skincare":"ថែរក្សាស្បែក","Cosmetics":"គ្រឿងសំអាង","Personal Care":"ថែរក្សាខ្លួន","Health & Wellness":"សុខភាព","Daily Use":"ប្រើប្រចាំថ្ងៃ","Hair Care":"ថែរក្សាសក់","Fragrance & Gift Sets":"ទឹកអប់ និងឈុតកាដូ","Eyelashes & Brows":"រោមភ្នែក និងចិញ្ចើម","Beauty Tools":"ឧបករណ៍សម្ផស្ស","Baby & Kids":"ទារក និងកុមារ","Pre-order / Custom Brand":"កម្ម៉ង់ទុកមុន / ម៉ាកផ្ទាល់ខ្លួន","Pre-order / Customize Your Brand":"កម្ម៉ង់ទុកមុន / បង្កើតម៉ាកផ្ទាល់ខ្លួន","Customize your brand":"បង្កើតម៉ាកផ្ទាល់ខ្លួន","Request any product or your own label":"ស្នើសុំទំនិញណាមួយ ឬស្លាកផ្ទាល់ខ្លួន","Products with your own logo & label":"ទំនិញដែលមានឡូហ្គោ និងស្លាករបស់អ្នក","Wholesale price (Photos have prices)":"តម្លៃដុំ (តម្លៃមាននៅលើរូបភាព)","Wholesale price":"តម្លៃដុំ","Ask price":"សួរតម្លៃ","Price on Telegram":"តម្លៃតាម Telegram","💬 Price on Telegram":"💬 តម្លៃតាម Telegram","+ price on Telegram":"+ តម្លៃតាម Telegram","On Telegram":"តាម Telegram","💬 Ask price on Telegram now":"💬 សួរតម្លៃតាម Telegram ឥឡូវនេះ","💬 Chat with us":"💬 ជជែកជាមួយយើង","Chat with us on Telegram":"ជជែកជាមួយយើងតាម Telegram","Chat is not set up yet":"មិនទាន់បានរៀបចំការជជែកនៅឡើយ","Choose your quantity and place the order. We'll message you on Telegram with the price — you pay only after you agree.":"ជ្រើសរើសចំនួន ហើយដាក់ការកម្ម៉ង់។ យើងនឹងផ្ញើសារប្រាប់តម្លៃតាម Telegram — អ្នកបង់ប្រាក់តែក្រោយពេលយល់ព្រមប៉ុណ្ណោះ។","Available to order":"អាចកម្ម៉ង់បាន","Add to cart":"ដាក់ក្នុងកន្ត្រក","Added to cart":"បានដាក់ក្នុងកន្ត្រក","Buy now":"ទិញឥឡូវ","You may also like":"អ្នកប្រហែលជាចូលចិត្ត","You May Also Like":"អ្នកប្រហែលជាចូលចិត្ត","Pre-order":"កម្ម៉ង់ទុកមុន","Pay {0} deposit now ({1} each), the rest when it arrives in Cambodia.":"បង់ប្រាក់កក់ {0} ឥឡូវ ({1} ក្នុងមួយ) នៅសល់បង់ពេលទំនិញមកដល់កម្ពុជា។","Arrives in about":"មកដល់ក្នុងរយៈពេលប្រហែល","Arrives in about {0} days":"មកដល់ក្នុងរយៈពេលប្រហែល {0} ថ្ងៃ","{0} days":"{0} ថ្ងៃ","● Pre-order · ~{0} days":"● កម្ម៉ង់ទុកមុន · ~{0} ថ្ងៃ","Tap the ♡ on any product to save it here":"ចុច ♡ លើទំនិញដើម្បីរក្សាទុកនៅទីនេះ","My Cart ({0})":"កន្ត្រករបស់ខ្ញុំ ({0})","Your cart is empty":"កន្ត្រករបស់អ្នកទទេ","Your cart will become":"កន្ត្រករបស់អ្នកនឹងក្លាយជា","2 orders":"ការកម្ម៉ង់ ២",": normal items are delivered first, pre-order items when they arrive.":"៖ ទំនិញធម្មតាដឹកជូនមុន ទំនិញកម្ម៉ង់ទុកមុនដឹកជូនពេលមកដល់។","Checkout":"ទូទាត់","Checkout ({0})":"ទូទាត់ ({0})","Delivery details":"ព័ត៌មានដឹកជញ្ជូន","Your name":"ឈ្មោះរបស់អ្នក","Delivery address":"អាសយដ្ឋានដឹកជញ្ជូន","House, street, sangkat, khan, city":"ផ្ទះ ផ្លូវ សង្កាត់ ខណ្ឌ ក្រុង","Note (optional)":"កំណត់ចំណាំ (មិនចាំបាច់)","e.g. call before delivery":"ឧ. សូមតេមុនពេលដឹក","Items ({0})":"ទំនិញ ({0})","Items":"ទំនិញ","Pre-order items":"ទំនិញកម្ម៉ង់ទុកមុន","Delivery (per order)":"ដឹកជញ្ជូន (ក្នុងមួយការកម្ម៉ង់)","Pre-order deposit now":"ប្រាក់កក់ទំនិញកម្ម៉ង់ទុកមុន","Pay now":"បង់ឥឡូវ","Pay when pre-order arrives":"បង់ពេលទំនិញកម្ម៉ង់មកដល់","Payment by bank transfer / QR. You'll upload your slip after placing the order.":"បង់តាមការផ្ទេរប្រាក់ធនាគារ / QR។ អ្នកនឹងផ្ញើវិក្កយបត្របង់ប្រាក់ក្រោយពេលកម្ម៉ង់។","Some items don't show a price yet. Place your order now — we'll message you on Telegram with the final price.":"ទំនិញខ្លះមិនទាន់មានតម្លៃនៅឡើយ។ សូមកម្ម៉ង់ឥឡូវ — យើងនឹងផ្ញើសារប្រាប់តម្លៃចុងក្រោយតាម Telegram។","You pay only after you agree.":"អ្នកបង់ប្រាក់តែក្រោយពេលយល់ព្រមប៉ុណ្ណោះ។","Place order":"ដាក់ការកម្ម៉ង់","Placing…":"កំពុងកម្ម៉ង់…","Order placed!":"កម្ម៉ង់បានជោគជ័យ!","Next: pay and send us your payment slip.":"បន្ទាប់៖ បង់ប្រាក់ ហើយផ្ញើវិក្កយបត្របង់ប្រាក់មកយើង។","We'll message you on Telegram with the price. You pay after you agree.":"យើងនឹងផ្ញើសារប្រាប់តម្លៃតាម Telegram។ អ្នកបង់ប្រាក់ក្រោយពេលយល់ព្រម។","Qty {0}":"ចំនួន {0}","My Orders":"ការកម្ម៉ង់របស់ខ្ញុំ","Orders":"ការកម្ម៉ង់","Wishlist":"ចូលចិត្ត","My wishlist":"បញ្ជីដែលខ្ញុំចូលចិត្ត","Requests":"សំណើ","My requests":"សំណើរបស់ខ្ញុំ","To pay":"ត្រូវបង់","Processing":"កំពុងរៀបចំ","Shipping":"កំពុងដឹក","Delivered":"បានដឹកដល់","Cancelled":"បានលុបចោល","No orders here":"មិនមានការកម្ម៉ង់","{0} orders":"ការកម្ម៉ង់ {0}","Waiting for confirmation":"រង់ចាំការបញ្ជាក់","Checking your payment":"កំពុងពិនិត្យការបង់ប្រាក់","Paid — preparing":"បានបង់ — កំពុងរៀបចំ","Deposit paid — preparing":"បានបង់ប្រាក់កក់ — កំពុងរៀបចំ","Preparing":"កំពុងរៀបចំ","On the way":"កំពុងដឹកមក","Arrived — pay balance":"មកដល់ហើយ — បង់ប្រាក់នៅសល់","Confirmed — preparing":"បានបញ្ជាក់ — កំពុងរៀបចំ","Order":"ការកម្ម៉ង់","Special order":"ការកម្ម៉ង់ពិសេស","Custom brand":"ម៉ាកផ្ទាល់ខ្លួន","Paid":"បានបង់","Waiting for price":"រង់ចាំតម្លៃ","— we'll message you on Telegram. After you agree, the total shows here and you can pay.":"— យើងនឹងផ្ញើសារតាម Telegram។ ក្រោយពេលយល់ព្រម តម្លៃសរុបនឹងបង្ហាញនៅទីនេះ ហើយអ្នកអាចបង់ប្រាក់បាន។","Your last payment slip was not accepted":"វិក្កយបត្របង់ប្រាក់ចុងក្រោយរបស់អ្នកមិនត្រូវបានទទួលយក",". Please send it again.":"។ សូមផ្ញើម្តងទៀត។","Cancel order":"លុបចោលការកម្ម៉ង់","Order cancelled":"បានលុបចោលការកម្ម៉ង់","Pay {0}":"បង់ {0}","Pay deposit {0}":"បង់ប្រាក់កក់ {0}","Pay balance {0}":"បង់ប្រាក់នៅសល់ {0}","Deposit for your pre-order":"ប្រាក់កក់សម្រាប់ទំនិញកម្ម៉ង់ទុកមុន","Remaining balance":"ប្រាក់នៅសល់","Full payment":"បង់ពេញ","{0}. Transfer exactly":"{0}. ផ្ទេរប្រាក់ចំនួនពិតប្រាកដ","(USD)":"(ដុល្លារ)","{0}. Take a screenshot of the receipt":"{0}. ថតអេក្រង់វិក្កយបត្រ","{0}. Upload it below — we'll confirm soon":"{0}. ផ្ញើវានៅខាងក្រោម — យើងនឹងបញ្ជាក់ឆាប់ៗ","Payment slip photo":"រូបវិក្កយបត្របង់ប្រាក់","Send payment slip":"ផ្ញើវិក្កយបត្របង់ប្រាក់","Sending…":"កំពុងផ្ញើ…","Sending photos…":"កំពុងផ្ញើរូបភាព…","Payment slip sent — we will check it soon":"បានផ្ញើវិក្កយបត្រ — យើងនឹងពិនិត្យឆាប់ៗ","Could not read this photo, try another":"មិនអាចអានរូបនេះបានទេ សូមសាករូបផ្សេង","Could not read one photo":"មិនអាចអានរូបមួយបាន","Saved automatically when you place an order.":"រក្សាទុកដោយស្វ័យប្រវត្តិពេលអ្នកកម្ម៉ង់។","You can change it at checkout any time.":"អ្នកអាចប្តូរវាពេលទូទាត់បានគ្រប់ពេល។","Saved for your next order":"បានរក្សាទុកសម្រាប់ការកម្ម៉ង់លើកក្រោយ","Pre-order a product":"កម្ម៉ង់ទុកមុននូវទំនិញ","Want something we don't have? Send a photo or a link":"ចង់បានទំនិញដែលយើងមិនមាន? ផ្ញើរូបភាព ឬតំណភ្ជាប់","Request any product, or create products with your own brand":"ស្នើសុំទំនិញណាមួយ ឬបង្កើតទំនិញជាមួយម៉ាកផ្ទាល់ខ្លួន","Photos of the product (up to {0})":"រូបភាពទំនិញ (រហូតដល់ {0})","Photos — the product you want, and your logo (up to {0})":"រូបភាព — ទំនិញដែលអ្នកចង់បាន និងឡូហ្គោរបស់អ្នក (រហូតដល់ {0})","Add photo":"បន្ថែមរូប","or paste a link":"ឬបិទភ្ជាប់តំណ","Product link (optional)":"តំណទំនិញ (មិនចាំបាច់)","Example link (optional)":"តំណឧទាហរណ៍ (មិនចាំបាច់)","Product name / shade / size you want":"ឈ្មោះទំនិញ / ពណ៌ / ទំហំដែលអ្នកចង់បាន","What product do you want with your brand?":"តើអ្នកចង់បានទំនិញអ្វីជាមួយម៉ាករបស់អ្នក?","e.g. Snail essence {0}ml, shade {1}":"ឧ. Snail essence {0}ml ពណ៌ {1}","e.g. Face serum {0}ml, glass bottle, my logo on the label, pink box":"ឧ. សេរ៉ូមមុខ {0}ml ដបកែវ ឡូហ្គោខ្ញុំនៅលើស្លាក ប្រអប់ពណ៌ផ្កាឈូក","We'll reply with price, minimum quantity and time.":"យើងនឹងឆ្លើយតបពីតម្លៃ ចំនួនអប្បបរមា និងរយៈពេល។","Request a price":"ស្នើសុំតម្លៃ","Sent! We'll reply with a price soon":"បានផ្ញើ! យើងនឹងឆ្លើយតបពីតម្លៃឆាប់ៗ","Sent! We'll reply with the price soon":"បានផ្ញើ! យើងនឹងឆ្លើយតបពីតម្លៃឆាប់ៗ","Waiting for quote":"រង់ចាំតម្លៃ","Price ready":"មានតម្លៃហើយ","Ordered":"បានកម្ម៉ង់","Not available":"មិនមាន","Price each":"តម្លៃក្នុងមួយ","Total for {0}":"សរុបសម្រាប់ {0}","Order it":"កម្ម៉ង់","No thanks":"ទេ អរគុណ","Confirm your order":"បញ្ជាក់ការកម្ម៉ង់របស់អ្នក","Confirm order":"បញ្ជាក់ការកម្ម៉ង់","Deposit now ({0})":"ប្រាក់កក់ឥឡូវ ({0})","Item × {0}":"ទំនិញ × {0}","Decline this price?":"បដិសេធតម្លៃនេះ?","Order created — please pay the deposit":"បានបង្កើតការកម្ម៉ង់ — សូមបង់ប្រាក់កក់","Cancel order {0}?":"លុបចោលការកម្ម៉ង់ {0}?","Please enter your name":"សូមបញ្ចូលឈ្មោះរបស់អ្នក","Please enter a valid phone number":"សូមបញ្ចូលលេខទូរស័ព្ទឲ្យបានត្រឹមត្រូវ","Please enter your delivery address":"សូមបញ្ចូលអាសយដ្ឋានដឹកជញ្ជូន","A product in your cart is no longer available":"ទំនិញមួយក្នុងកន្ត្រករបស់អ្នកលែងមានហើយ","Invalid quantity":"ចំនួនមិនត្រឹមត្រូវ","Nothing to pay":"គ្មានអ្វីត្រូវបង់","Order not found":"រកមិនឃើញការកម្ម៉ង់","Request not found":"រកមិនឃើញសំណើ","Photo is too large":"រូបភាពធំពេក","A photo is too large":"រូបភាពមួយធំពេក","One of the photos could not be read — please choose it again":"រូបភាពមួយមិនអាចអានបាន — សូមជ្រើសរើសម្តងទៀត","Please add a photo, a link, or describe what you want":"សូមបន្ថែមរូបភាព តំណ ឬពិពណ៌នាអ្វីដែលអ្នកចង់បាន","Please choose a photo of your payment slip":"សូមជ្រើសរើសរូបវិក្កយបត្របង់ប្រាក់","Please close and reopen the shop from Telegram":"សូមបិទ ហើយបើកហាងឡើងវិញពី Telegram","Something went wrong, please try again":"មានបញ្ហា សូមព្យាយាមម្តងទៀត","The link should start with http":"តំណត្រូវចាប់ផ្តើមដោយ http","This order can no longer be cancelled — please contact us":"ការកម្ម៉ង់នេះមិនអាចលុបចោលបានទៀតទេ — សូមទាក់ទងយើង","This order is not waiting for payment":"ការកម្ម៉ង់នេះមិនរង់ចាំការបង់ប្រាក់ទេ","This quote is no longer available":"តម្លៃនេះលែងមានសុពលភាពហើយ","You have many requests waiting — please wait for our reply":"អ្នកមានសំណើច្រើនកំពុងរង់ចាំ — សូមរង់ចាំការឆ្លើយតបពីយើង","Your payment is already being checked":"ការបង់ប្រាក់របស់អ្នកកំពុងត្រូវបានពិនិត្យ","Load failed":"ផ្ទុកមិនបាន","Please open this shop from Telegram":"សូមបើកហាងនេះពី Telegram","Try again":"ព្យាយាមម្តងទៀត","d":"ថ្ងៃ","h":"ម៉ោង","m":"នាទី","s":"វិនាទី","— Order":"— ការកម្ម៉ង់","Pay KB{0}":"បង់ KB{0}","e.g. {0}":"ឧ. {0}"},"zh":{"Home":"首页","Categories":"分类","Me":"我的","Cart":"购物车","Your Beauty, Your Confidence":"你的美丽，你的自信","Find products":"查找商品","Search products":"搜索商品","All":"全部","OK":"好的","Save":"收藏","Copy":"复制","Copied":"已复制","Total":"合计","Price":"价格","Phone":"电话","Address":"地址","Description":"商品描述","Quantity":"数量","Delivery":"运费","Free":"免运费","New":"新品","View All":"查看全部","View All ›":"查看全部 ›","Shop more →":"继续购物 →","Start shopping":"开始购物","Language":"语言","Choose language":"选择语言","Flash Sale":"限时抢购","Ends in":"剩余","Ends {0} Oct, {1}:{2}":"10月{0}日 {1}:{2} 结束","Best Sellers":"热销商品","New Arrivals":"新品上架","Just for you":"为你推荐","Recommended For You":"为你推荐","Popular categories":"热门分类","Featured":"精选","All products":"全部商品","Pre-order products":"预订商品","{0} product":"{0} 件商品","{0} products":"{0} 件商品","{0} result":"{0} 个结果","{0} sold":"已售 {0}","{0}+ sold":"已售 {0}+","{0}+ sold ·":"已售 {0}+ ·","{0} sold · Pre-order":"已售 {0} · 预订","Relevance":"综合","Best selling":"销量最高","Newest":"最新","Price: low to high":"价格：从低到高","Price: high to low":"价格：从高到低","Sold out":"已售罄","Skincare":"护肤品","Cosmetics":"彩妆","Personal Care":"个人护理","Health & Wellness":"健康保健","Daily Use":"日用品","Hair Care":"护发","Fragrance & Gift Sets":"香水与礼盒","Eyelashes & Brows":"睫毛与眉毛","Beauty Tools":"美妆工具","Baby & Kids":"母婴儿童","Pre-order / Custom Brand":"预订 / 定制品牌","Pre-order / Customize Your Brand":"预订 / 定制你的品牌","Customize your brand":"定制你的品牌","Request any product or your own label":"申请任何商品或自有标签","Products with your own logo & label":"印有你自己标志和标签的商品","Wholesale price (Photos have prices)":"批发价（价格见图片）","Wholesale price":"批发价","Ask price":"询价","Price on Telegram":"Telegram 询价","💬 Price on Telegram":"💬 Telegram 询价","+ price on Telegram":"+ Telegram 询价","On Telegram":"Telegram 询价","💬 Ask price on Telegram now":"💬 立即在 Telegram 询价","💬 Chat with us":"💬 联系我们","Chat with us on Telegram":"在 Telegram 联系我们","Chat is not set up yet":"尚未设置聊天","Choose your quantity and place the order. We'll message you on Telegram with the price — you pay only after you agree.":"选择数量并下单。我们会通过 Telegram 告诉你价格——你同意后才需付款。","Available to order":"可下单","Add to cart":"加入购物车","Added to cart":"已加入购物车","Buy now":"立即购买","You may also like":"猜你喜欢","You May Also Like":"猜你喜欢","Pre-order":"预订","Pay {0} deposit now ({1} each), the rest when it arrives in Cambodia.":"现在支付 {0} 定金（每件 {1}），其余在到达柬埔寨后支付。","Arrives in about":"预计到达约","Arrives in about {0} days":"约 {0} 天到达","{0} days":"{0} 天","● Pre-order · ~{0} days":"● 预订 · 约{0}天","Tap the ♡ on any product to save it here":"点击商品上的 ♡ 即可收藏到这里","My Cart ({0})":"我的购物车（{0}）","Your cart is empty":"购物车是空的","Your cart will become":"你的购物车将分为","2 orders":"2 个订单",": normal items are delivered first, pre-order items when they arrive.":"：现货先发，预订商品到货后再发。","Checkout":"结算","Checkout ({0})":"结算（{0}）","Delivery details":"收货信息","Your name":"你的姓名","Delivery address":"收货地址","House, street, sangkat, khan, city":"门牌号、街道、分区、区、城市","Note (optional)":"备注（选填）","e.g. call before delivery":"例如：送货前请来电","Items ({0})":"商品（{0}）","Items":"商品","Pre-order items":"预订商品","Delivery (per order)":"运费（每单）","Pre-order deposit now":"预订定金","Pay now":"立即支付","Pay when pre-order arrives":"预订到货时支付","Payment by bank transfer / QR. You'll upload your slip after placing the order.":"通过银行转账 / 二维码付款。下单后上传付款凭证。","Some items don't show a price yet. Place your order now — we'll message you on Telegram with the final price.":"部分商品暂未显示价格。请先下单——我们会通过 Telegram 告诉你最终价格。","You pay only after you agree.":"你同意后才需付款。","Place order":"提交订单","Placing…":"正在下单…","Order placed!":"下单成功！","Next: pay and send us your payment slip.":"下一步：付款并发送付款凭证。","We'll message you on Telegram with the price. You pay after you agree.":"我们会通过 Telegram 告诉你价格，你同意后再付款。","Qty {0}":"数量 {0}","My Orders":"我的订单","Orders":"订单","Wishlist":"收藏","My wishlist":"我的收藏","Requests":"申请","My requests":"我的申请","To pay":"待付款","Processing":"处理中","Shipping":"配送中","Delivered":"已送达","Cancelled":"已取消","No orders here":"暂无订单","{0} orders":"{0} 个订单","Waiting for confirmation":"等待确认","Checking your payment":"正在核对付款","Paid — preparing":"已付款 — 备货中","Deposit paid — preparing":"已付定金 — 备货中","Preparing":"备货中","On the way":"运送中","Arrived — pay balance":"已到货 — 请支付尾款","Confirmed — preparing":"已确认 — 备货中","Order":"订单","Special order":"特别订单","Custom brand":"定制品牌","Paid":"已付","Waiting for price":"等待报价","— we'll message you on Telegram. After you agree, the total shows here and you can pay.":"— 我们会通过 Telegram 联系你。你同意后，这里会显示总价，即可付款。","Your last payment slip was not accepted":"你上次的付款凭证未通过",". Please send it again.":"。请重新发送。","Cancel order":"取消订单","Order cancelled":"订单已取消","Pay {0}":"支付 {0}","Pay deposit {0}":"支付定金 {0}","Pay balance {0}":"支付尾款 {0}","Deposit for your pre-order":"预订定金","Remaining balance":"剩余尾款","Full payment":"全额付款","{0}. Transfer exactly":"{0}. 请准确转账","(USD)":"（美元）","{0}. Take a screenshot of the receipt":"{0}. 截图保存转账凭证","{0}. Upload it below — we'll confirm soon":"{0}. 在下方上传——我们会尽快确认","Payment slip photo":"付款凭证照片","Send payment slip":"发送付款凭证","Sending…":"发送中…","Sending photos…":"正在发送照片…","Payment slip sent — we will check it soon":"付款凭证已发送——我们会尽快核对","Could not read this photo, try another":"无法读取这张照片，请换一张","Could not read one photo":"有一张照片无法读取","Saved automatically when you place an order.":"下单时会自动保存。","You can change it at checkout any time.":"结算时可随时修改。","Saved for your next order":"已保存，下次下单使用","Pre-order a product":"预订商品","Want something we don't have? Send a photo or a link":"想要我们没有的商品？发送照片或链接","Request any product, or create products with your own brand":"申请任何商品，或打造你自己品牌的产品","Photos of the product (up to {0})":"商品照片（最多 {0} 张）","Photos — the product you want, and your logo (up to {0})":"照片——你想要的商品及你的标志（最多 {0} 张）","Add photo":"添加照片","or paste a link":"或粘贴链接","Product link (optional)":"商品链接（选填）","Example link (optional)":"参考链接（选填）","Product name / shade / size you want":"你想要的商品名称 / 色号 / 规格","What product do you want with your brand?":"你想用自己的品牌做什么产品？","e.g. Snail essence {0}ml, shade {1}":"例如：蜗牛精华 {0}ml，色号 {1}","e.g. Face serum {0}ml, glass bottle, my logo on the label, pink box":"例如：面部精华 {0}ml，玻璃瓶，标签印我的标志，粉色盒子","We'll reply with price, minimum quantity and time.":"我们会回复价格、起订量和时间。","Request a price":"申请报价","Sent! We'll reply with a price soon":"已发送！我们会尽快报价","Sent! We'll reply with the price soon":"已发送！我们会尽快报价","Waiting for quote":"等待报价","Price ready":"已报价","Ordered":"已下单","Not available":"无货","Price each":"单价","Total for {0}":"{0} 件合计","Order it":"下单","No thanks":"不用了","Confirm your order":"确认订单","Confirm order":"确认下单","Deposit now ({0})":"现付定金（{0}）","Item × {0}":"商品 × {0}","Decline this price?":"拒绝这个报价？","Order created — please pay the deposit":"订单已创建——请支付定金","Cancel order {0}?":"取消订单 {0}？","Please enter your name":"请输入你的姓名","Please enter a valid phone number":"请输入有效的电话号码","Please enter your delivery address":"请输入收货地址","A product in your cart is no longer available":"购物车中有商品已下架","Invalid quantity":"数量无效","Nothing to pay":"无需付款","Order not found":"找不到订单","Request not found":"找不到申请","Photo is too large":"照片太大","A photo is too large":"有一张照片太大","One of the photos could not be read — please choose it again":"有一张照片无法读取——请重新选择","Please add a photo, a link, or describe what you want":"请添加照片、链接，或描述你想要的商品","Please choose a photo of your payment slip":"请选择付款凭证照片","Please close and reopen the shop from Telegram":"请关闭并从 Telegram 重新打开商店","Something went wrong, please try again":"出了点问题，请重试","The link should start with http":"链接应以 http 开头","This order can no longer be cancelled — please contact us":"此订单已无法取消——请联系我们","This order is not waiting for payment":"此订单不需要付款","This quote is no longer available":"此报价已失效","You have many requests waiting — please wait for our reply":"你有很多申请在等待——请等待我们的回复","Your payment is already being checked":"你的付款正在核对中","Load failed":"加载失败","Please open this shop from Telegram":"请从 Telegram 打开本商店","Try again":"重试","d":"天","h":"时","m":"分","s":"秒","— Order":"— 订单","Pay KB{0}":"支付 KB{0}","e.g. {0}":"例如：{0}"}};
+const I18N_PRE = [["Ends ","បញ្ចប់ ","结束于 "]];
+const LANGS = [['km','ខ្មែរ'],['en','English'],['zh','中文']];
+let LANG = (() => { try { return localStorage.getItem('kb_lang') || ''; } catch(_) { return ''; } })() || ((()=>{ const c = (window.Telegram?.WebApp?.initDataUnsafe?.user?.language_code || '').toLowerCase(); return c.startsWith('zh') ? 'zh' : 'km'; })());
+const LOC = () => ({ km:'km-KH', zh:'zh-CN' }[LANG] || 'en-GB');
+const I18N_NUM = /\$?-?\d[\d,]*(?:\.\d+)?%?/g;
+const I18N_MON = { en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  km:['មករា','កុម្ភៈ','មីនា','មេសា','ឧសភា','មិថុនា','កក្កដា','សីហា','កញ្ញា','តុលា','វិច្ឆិកា','ធ្នូ'] };
+function fmtD(d, o = {}){ // date in the chosen language. o.t = with time, o.y = with year
+  d = new Date(d); if (isNaN(d)) return '';
+  const p2 = n => String(n).padStart(2, '0'), tm = p2(d.getHours()) + ':' + p2(d.getMinutes());
+  if (LANG === 'zh') return (o.y ? d.getFullYear() + '年' : '') + (d.getMonth()+1) + '月' + d.getDate() + '日' + (o.t ? ' ' + tm : '');
+  return p2(d.getDate()) + ' ' + (I18N_MON[LANG] || I18N_MON.en)[d.getMonth()] + (o.y ? ' ' + d.getFullYear() : '') + (o.t ? (LANG === 'en' ? ', ' : ' ') + tm : '');
+}
+function i18nOne(core){
+  const d = I18N[LANG]; if (!d) return null;
+  core = core.replace(/\s+/g, ' ');
+  if (d[core] != null) return d[core];
+  const nums = []; const tpl = core.replace(I18N_NUM, x => { nums.push(x); return '{' + (nums.length-1) + '}'; });
+  if (nums.length && d[tpl] != null) return d[tpl].replace(/\{(\d)\}/g, (_, i) => nums[i]);
+  for (const [p, km, zh] of I18N_PRE) if (core.startsWith(p)) return (LANG === 'km' ? km : zh) + core.slice(p.length);
+  for (const sep of [' · ', ' — ', ': ']) if (core.includes(sep)) {
+    let any = false;
+    const out = core.split(sep).map(x => { const t = x.trim(); if (!t || !/[A-Za-z]/.test(t)) return x; const r = i18nOne(t); if (r == null) return x; any = true; return x.replace(t, r); });
+    if (any) return out.join(sep);
+  }
+  return null;
+}
+function T(s){
+  if (LANG === 'en' || s == null) return s;
+  const str = String(s), m = str.match(/^(\s*)([\s\S]*?)(\s*)$/), core = m[2];
+  if (!core || !/[A-Za-z]/.test(core)) return str;
+  const r = i18nOne(core); return r == null ? str : m[1] + r + m[3];
+}
+const I18N_ATTR = ['placeholder', 'title', 'aria-label'];
+function i18nText(n){
+  const p = n.parentElement; if (!p || /^(SCRIPT|STYLE|TEXTAREA)$/.test(p.tagName) || p.closest('.notr')) return;
+  const v = n.nodeValue; if (n.__t === v || LANG === 'en') return;
+  n.__en = v; const r = T(v); if (r !== v) n.nodeValue = r; n.__t = n.nodeValue;
+}
+function i18nAttrs(el){
+  if (!el.getAttribute || el.closest('.notr')) return;
+  for (const a of I18N_ATTR){ const v = el.getAttribute(a); if (v == null) continue; el.__ta = el.__ta || {};
+    if (el.__ta[a] && el.__ta[a].t === v) continue; if (LANG === 'en') { el.__ta[a] = { en: v, t: v }; continue; } const r = T(v); el.__ta[a] = { en: v, t: r }; if (r !== v) el.setAttribute(a, r); }
+}
+function i18nTree(root){
+  if (root.nodeType === 3) return i18nText(root);
+  if (root.nodeType !== 1) return;
+  i18nAttrs(root); root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(i18nAttrs);
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) i18nText(n);
+}
+function i18nReset(){ // back to English, then translate again in the new language
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n;
+  while ((n = w.nextNode())) if (n.__en != null && n.__t === n.nodeValue){ n.nodeValue = n.__en; n.__t = null; }
+  document.querySelectorAll('*').forEach(el => { if (el.__ta) { for (const a in el.__ta) if (el.getAttribute(a) === el.__ta[a].t) el.setAttribute(a, el.__ta[a].en); el.__ta = null; } });
+  i18nTree(document.body);
+}
+new MutationObserver(ms => { if (LANG === 'en') return; for (const m of ms){
+  if (m.type === 'characterData') i18nText(m.target);
+  else if (m.type === 'attributes') i18nAttrs(m.target);
+  else m.addedNodes.forEach(i18nTree); } }).observe(document.documentElement, { childList:true, subtree:true, characterData:true, attributes:true, attributeFilter:I18N_ATTR });
+document.documentElement.lang = LANG;
+{ const _c = window.confirm.bind(window); window.confirm = m => _c(T(m)); }
+i18nTree(document.body); document.addEventListener('DOMContentLoaded', () => i18nTree(document.body));
+function setLang(l){ LANG = l; try { localStorage.setItem('kb_lang', l); } catch(_){} document.documentElement.lang = l; i18nReset(); if (typeof onLangChange === 'function') onLangChange(); }
+/*I18N-END*/</script>
 <script>
 // ====== CONFIG ======
 const SUPABASE_URL = 'https://mirdoyaqswbexricqybv.supabase.co';
@@ -304,7 +373,7 @@ const $ = s => document.querySelector(s);
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money = n => '$' + Number(n || 0).toFixed(2);
 const r2 = n => Math.round(n * 100) / 100;
-const dt = d => new Date(d).toLocaleDateString('en-GB', {day:'2-digit', month:'short', year:'numeric'});
+const dt = d => fmtD(d,{y:1});
 const haptic = t => { try { tg?.HapticFeedback?.notificationOccurred(t); } catch(_){} };
 
 // ====== ICONS ======
@@ -312,6 +381,11 @@ const P = {
   home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
   list:'<path d="M8 6h13M8 12h13M8 18h13"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>',
   user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',
+  hair:'<path d="M5 4h14v4H5z"/><path d="M7 8v11M10 8v11M13 8v11M16 8v11"/>',
+  perfume:'<rect x="5" y="9" width="14" height="12" rx="3"/><path d="M9 9V6h6v3M12 6V3M10 3h4"/>',
+  eye:'<path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/><path d="M5 7 3.5 5M9 5.3 8.4 3M15 5.3l.6-2.3M19 7l1.5-2"/>',
+  brush:'<path d="M14 3l7 7-7.5 7.5-7-7z"/><path d="M6.5 10.5 3 21l10.5-3.5"/>',
+  baby:'<circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M9 14.5c1.6 1.6 4.4 1.6 6 0M12 3c-1 1.5 0 3 1.5 3"/>',
   chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/>',
   cart:'<path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/>',
   search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
@@ -340,6 +414,11 @@ const P = {
   leaf:'<path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14"/><path d="M5 19c3-4 6-7 10-9"/>'
 };
 function catIcon(name){ const n=(name||'').toLowerCase();
+  if (/baby|kid|child|ក្មេង/.test(n)) return 'baby';
+  if (/hair|សក់/.test(n)) return 'hair';
+  if (/fragr|perfum|gift|ទឹកអប់/.test(n)) return 'perfume';
+  if (/lash|brow|eye|រោម/.test(n)) return 'eye';
+  if (/tool|brush|puff|sponge/.test(n)) return 'brush';
   if (/skin|face|ស្បែក/.test(n)) return 'face';
   if (/cosmet|make|lip|គ្រឿងសំអាង/.test(n)) return 'lipstick';
   if (/personal|body|hair|bath|care/.test(n)) return 'bottle';
@@ -350,9 +429,9 @@ const ic = (n, st='') => `<svg class="ic" viewBox="0 0 24 24" style="${st}">${P[
 document.querySelectorAll('[data-i]').forEach(e => e.insertAdjacentHTML('afterbegin', ic(e.dataset.i)));
 
 const STATUS = {
-  pending_payment:'Waiting for payment', payment_review:'Checking your payment', paid:'Paid — preparing',
-  deposit_paid:'Deposit received', ordered_taobao:'Ordered from supplier', shipping:'On the way to Cambodia',
-  arrived:'Arrived — pay balance', ready:'Ready for delivery', delivered:'Delivered', cancelled:'Cancelled'
+  pending_payment:'Waiting for confirmation', payment_review:'Checking your payment', paid:'Paid — preparing',
+  deposit_paid:'Deposit paid — preparing', ordered_taobao:'Preparing', shipping:'On the way',
+  arrived:'Arrived — pay balance', ready:'Confirmed — preparing', delivered:'Delivered', cancelled:'Cancelled'
 };
 const OGROUP = {
   topay:{ label:'To pay', icon:'wallet', bg:'#fff3df', col:'#e08a12', st:['pending_payment','payment_review','arrived'] },
@@ -407,6 +486,14 @@ const soldTxt = n => n < 10 ? `${n}` : `${Math.floor(n/10)*10}+`;
 const isOut = p => false;   // no stock control — customers can always order
 const noPrice = p => !(price(p) > 0);   // price not set yet (0) → customer taps "Ask price" instead of buying
 const priceHtml = p => noPrice(p) ? '<span class="askp">Ask price</span>' : money(price(p));
+const TGU = () => String(S.settings?.contact_telegram || '').trim().replace(/^@/, '');
+function chatUs(text){
+  const u = TGU(); if (!u) return toast('Chat is not set up yet');
+  const link = 'https://t.me/' + encodeURIComponent(u) + (text ? '?text=' + encodeURIComponent(text) : '');
+  try { tg.openTelegramLink(link); } catch(_){ window.open(link, '_blank'); }
+}
+const chatBtn = (label, text) => TGU() ? `<button class="btn out block" style="margin-top:10px" onclick='chatUs(${JSON.stringify(text||"").replace(/'/g,"&#39;")})'>💬 ${label}</button>` : '';
+const pnote = big => { const t = String(S.settings?.price_note || '').trim(); return t ? `<div class="pnote${big?' big':''}">${esc(t)}</div>` : ''; };
 const NP_TXT = '<span class="askp">Price on Telegram</span>';
 const lineMoney = (unit, qty) => Number(unit) > 0 ? money(unit*qty) : NP_TXT;
 const prod = id => S.products.find(p => p.id === +id);
@@ -472,7 +559,7 @@ function pcard(p){
     <div class="im" style="background-image:url('${esc(img0(p))}')">${heartBtn(p)}${o?`<span class="disc">-${o}%</span>`:''}${tagFor(p)}</div>
     <div class="bd"><div class="nm">${esc(p.name)}</div>
       ${p.sold?`<div class="sold">${ic('bag','width:13px;height:13px')} ${soldTxt(p.sold)} sold</div>`:''}
-      <div class="prow"><div><div class="price">${priceHtml(p)}</div>${w?`<s>${money(w)}</s>`:''}</div>${cartBtn(p)}</div></div></div>`;
+      ${pnote()}<div class="prow" style="padding-top:2px"><div><div class="price">${priceHtml(p)}</div>${w?`<s>${money(w)}</s>`:''}</div>${cartBtn(p)}</div></div></div>`;
 }
 function hcard(p, kind, i){
   const w = was(p), o = off(p);
@@ -485,7 +572,7 @@ function hcard(p, kind, i){
   return `<div class="hc ${kind==='flash'?'fl':''}" onclick="go('product',{id:${p.id}})">
     <div class="im" style="background-image:url('${esc(img0(p))}')">${badge}${o?`<span class="disc">-${o}%</span>`:''}${kind!=='flash'?tagFor(p):''}</div>
     <div class="bd">${kind!=='flash'?`<div class="nm">${esc(p.name)}</div>`:''}
-      <div class="prow"><div><div class="price">${priceHtml(p)}</div>${w?`<s>${money(w)}</s>`:''}</div>${cartBtn(p)}</div>${foot}</div></div>`;
+      ${pnote()}<div class="prow" style="padding-top:2px"><div><div class="price">${priceHtml(p)}</div>${w?`<s>${money(w)}</s>`:''}</div>${cartBtn(p)}</div>${foot}</div></div>`;
 }
 const flashItems = () => flashOn() ? S.products.filter(p => p.flash_price_usd != null) : [];
 const bestItems = () => S.products.filter(p => p.sold > 0).sort((a,b) => b.sold - a.sold);
@@ -505,23 +592,31 @@ const sortSelect = () => `<select onchange="SORT=this.value;render()">${[['rel',
 function header(ph, tabs){
   return `<div class="hdr">
       <div class="brand"><img src="${LOGO}" alt=""><div><div class="wm"><b>K-</b>BEAUTICS</div><div class="tl">Your Beauty, Your Confidence</div></div>
-        <button class="hbtn" style="margin-left:auto" onclick="go('taobao')" title="Pre-order / Customize Your Brand">${ic('tag')}</button></div>
+        <button class="hbtn lbtn" style="margin-left:auto" onclick="langSheet()" title="Language">${(LANGS.find(x=>x[0]===LANG)||LANGS[1])[1]}</button>
+        <button class="hbtn" onclick="go('taobao')" title="Pre-order / Customize Your Brand">${ic('tag')}</button></div>
       <div class="hrow"><div class="sbox" onclick="go('search')">${ic('search')}<span>${ph}</span></div></div>
       ${tabs||''}</div>`;
 }
+
+// ====== LANGUAGE PICKER ======
+function langSheet(){
+  sheet(`<h3 style="margin:0 0 10px">Choose language</h3>` + LANGS.map(([k,n]) =>
+    `<button class="btn ${k===LANG?'pri':'out'} block notr" style="margin-bottom:8px" onclick="closeSheet();setLang('${k}')">${n}</button>`).join(''));
+}
+function onLangChange(){ render(); }
 
 // ====== HOME ======
 function home(){
   const cats = S.categories.filter(c => S.products.some(p => p.category_id === c.id));
   const fl = flashItems(), best = bestItems().slice(0,10), nw = newItems().slice(0,10);
-  const endTxt = new Date(flashEnd()).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+  const endTxt = fmtD(flashEnd(),{t:1});
   $('#view').innerHTML = header('Search products',
       `<div class="ctabs"><a class="on">All</a>${cats.map(c=>`<a onclick="CATSEL=${c.id};setTab('cats')">${esc(c.name)}</a>`).join('')}</div>`) + `
     <div class="wrap">
       ${S.banners.length ? `<div class="banners"><div class="btrack" id="btrack">${S.banners.map(b=>`<img src="${esc(b.image_url)}" onclick="bannerTap(${b.id})" alt="">`).join('')}</div>
         ${S.banners.length>1?`<div class="bdots">${S.banners.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`:''}</div>` : '<div style="height:4px"></div>'}
       ${S.categories.length ? `<div class="shortcuts">${S.categories.slice(0,6).map(c=>`<div class="circ" onclick="CATSEL=${c.id};setTab('cats')">
-        <div class="cim" style="${c.image_url?`background-image:url('${esc(c.image_url)}')`:''}">${c.image_url?'':ic(catIcon(c.name),'width:26px;height:26px;stroke-width:1.6')}</div><b>${esc(c.name)}</b></div>`).join('')}</div>` : ''}
+        <div class="cim" style="${c.image_url?`background-image:url('${esc(c.image_url)}')`:''}">${c.image_url?'':ic(catIcon(c.name),'width:20px;height:20px;stroke-width:1.7')}</div><b>${esc(c.name)}</b></div>`).join('')}</div>` : ''}
 
       ${fl.length ? `<div class="sec flash">
         <div class="shead"><h3>${ic('bolt','fill:currentColor;stroke:none')} Flash Sale</h3>${cdBoxes()}<span class="va" onclick="go('list',{kind:'flash'})" style="border:0;background:none">View All ›</span></div>
@@ -583,7 +678,7 @@ function cats(){
   let title = 'Products', list = S.products, top = '';
   if (CATSEL === 'featured'){
     top = `<div class="circles">${cs.map(c=>`<div class="circ" onclick="CATSEL=${c.id};render();window.scrollTo(0,0)">
-      <div class="cim" style="${c.image_url?`background-image:url('${esc(c.image_url)}')`:''}">${c.image_url?'':ic(catIcon(c.name),'width:28px;height:28px;stroke-width:1.6')}</div>
+      <div class="cim" style="${c.image_url?`background-image:url('${esc(c.image_url)}')`:''}">${c.image_url?'':ic(catIcon(c.name),'width:21px;height:21px;stroke-width:1.7')}</div>
       <b>${esc(c.name)}</b><span>${count(c.id)||''}</span></div>`).join('')}</div>`;
     title = 'All products';
   } else if (CATSEL === 'pre'){ list = S.products.filter(p => p.is_preorder); title = 'Pre-order products';
@@ -639,11 +734,11 @@ function productView({ id }){
       ${imgs.length>1?`<span class="cnt" id="gcnt">1/${imgs.length}</span>`:''}</div>
     ${isFlash(p)?`<div class="fbar">${ic('bolt','fill:#fff;stroke:none')} Flash Sale<span class="r">Ends in ${cdBoxes(false)}</span></div>`:''}
     <div class="pinfo">
-      <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap"><span class="price">${priceHtml(p)}</span>${w?`<s style="font-size:15px">${money(w)}</s><span class="disc2">-${o}%</span>`:''}</div>
+      ${pnote(1)}<div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap"><span class="price">${priceHtml(p)}</span>${w?`<s style="font-size:15px">${money(w)}</s><span class="disc2">-${o}%</span>`:''}</div>
       <h1>${esc(p.name)}</h1>
       <div class="small muted">${p.sold?`${soldTxt(p.sold)} sold · `:''}${p.is_preorder?'Pre-order':'<span style="color:var(--green)">Available to order</span>'}</div>
     </div>
-    ${noPrice(p)?`<div class="wrap"><div class="note">💬 <b>Price on Telegram</b><br>Choose your quantity and place the order. We'll message you on Telegram with the price — you pay only after you agree.</div></div>`:''}
+    ${noPrice(p)?`<div class="wrap"><div class="note">💬 <b>Price on Telegram</b><br>Choose your quantity and place the order. We'll message you on Telegram with the price — you pay only after you agree.${chatBtn('Ask price on Telegram now', 'Hello! What is the price of: ' + p.name + '?')}</div></div>`:''}
     ${p.is_preorder?`<div class="wrap"><div class="note">${ic('box','display:inline;vertical-align:-5px;width:18px;color:var(--o3)')} <b>Pre-order</b><br>
       Pay ${dep}% deposit now (${money(r2(price(p)*dep/100))} each), the rest when it arrives in Cambodia.${p.eta_days?`<br>Arrives in about <b>${p.eta_days} days</b>.`:''}</div></div>`:''}
     <div class="wrap">
@@ -791,6 +886,8 @@ function me(){
         <a onclick="go('taobao')"><span style="color:var(--o2)">${ic('tag')}</span>Pre-order / Customize Your Brand<span class="ar">${ic('right')}</span></a>
         <a onclick="go('wishlist')"><span style="color:var(--red)">${ic('heart')}</span>My wishlist<span class="ar">${ic('right')}</span></a>
         <a onclick="addressSheet()"><span style="color:#1f8f7a">${ic('pin')}</span>Delivery address<span class="ar">${ic('right')}</span></a>
+        <a onclick="langSheet()"><span style="color:#5b52d6">🌐</span>Language<span class="ar notr" style="width:auto;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:2px;white-space:nowrap">${(LANGS.find(x=>x[0]===LANG)||LANGS[1])[1]} ${ic('right')}</span></a>
+        ${TGU()?`<a onclick="chatUs('')"><span style="color:#229ED9">${ic('chat')}</span>Chat with us on Telegram<span class="ar">${ic('right')}</span></a>`:''}
       </div>
       <div class="titleline">Recommended For You</div>
       <div class="grid">${sorted(S.products.filter(p=>!isOut(p))).slice(0,12).map(pcard).join('')}</div>
@@ -830,7 +927,8 @@ function orderCard(o){
   const pays = (o.payments||[]).sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
   const lastRej = pays[0]?.status === 'rejected' ? pays[0] : null;
   const needPrice = (o.order_items||[]).some(i => !(Number(i.unit_price_usd) > 0)) && o.status === 'pending_payment';
-  const canPay = ['pending_payment','arrived'].includes(o.status) && !needPrice;
+  const checking = (o.payments||[]).some(p => p.status === 'pending');
+  const canPay = r2(o.total_usd - o.paid_usd) > 0 && !needPrice && !checking && !['cancelled','delivered','payment_review'].includes(o.status);
   const d = due(o);
   return `<div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center"><b>${esc(o.order_no)}</b><span class="badge s-${o.status}">${esc(STATUS[o.status]||o.status)}</span></div>
@@ -842,7 +940,7 @@ function orderCard(o){
       <div><b>Total</b><b>${needPrice?NP_TXT:money(o.total_usd)}</b></div>
       ${+o.paid_usd?`<div><span>Paid</span><span>${money(o.paid_usd)}</span></div>`:''}
     </div>
-    ${needPrice?`<div class="note" style="margin-top:10px">⏳ <b>Waiting for price</b> — we'll message you on Telegram. After you agree, the total shows here and you can pay.</div>`:''}
+    ${needPrice?`<div class="note" style="margin-top:10px">⏳ <b>Waiting for price</b> — we'll message you on Telegram. After you agree, the total shows here and you can pay.${chatBtn('Chat with us', 'Hello! About my order ' + o.order_no)}</div>`:''}
     ${lastRej && canPay?`<div class="note err">Your last payment slip was not accepted${lastRej.reject_reason?': '+esc(lastRej.reject_reason):''}. Please send it again.</div>`:''}
     ${canPay?`<button class="btn pri block" style="margin-top:10px" onclick="paySheet(${o.id})">Pay ${d.kind==='deposit'?'deposit ':d.kind==='balance'?'balance ':''}${money(d.amount)}</button>`:''}
     ${o.status==='pending_payment' && +o.paid_usd===0?`<div style="text-align:center;margin-top:10px"><span class="small muted" style="cursor:pointer;text-decoration:underline" onclick="cancelOrder(${o.id},'${esc(o.order_no)}')">Cancel order</span></div>`:''}
@@ -889,7 +987,7 @@ function compress(file){
   });
 }
 function copyText(t){ navigator.clipboard?.writeText(t).then(()=>toast('Copied'), ()=>toast(t)); }
-function confirmBox(msg, fn){ if (tg?.showConfirm) tg.showConfirm(msg, ok => ok && fn()); else if (confirm(msg)) fn(); }
+function confirmBox(msg, fn){ if (tg?.showConfirm) tg.showConfirm(T(msg), ok => ok && fn()); else if (confirm(msg)) fn(); }
 function cancelOrder(id, no){
   confirmBox(`Cancel order ${no}?`, async () => {
     try { await api('cancel_order', { order_id:id }); toast('Order cancelled'); refreshProducts(); await loadMy(); render(); } catch(e){ toast(e.message); }
