@@ -220,6 +220,9 @@ s{color:var(--muted);font-size:12px}
 .stp button{border:0;background:#fff;width:36px;height:34px;display:flex;align-items:center;justify-content:center}
 .stp button .ic{width:18px;height:18px}
 .stp span{min-width:30px;text-align:center;font-weight:700}
+.stp .qin{width:46px;height:34px;border:0;border-left:1px solid #eee;border-right:1px solid #eee;text-align:center;font:inherit;font-size:16px;font-weight:700;color:inherit;background:#fff;padding:0;-moz-appearance:textfield;appearance:textfield;border-radius:0}
+.stp .qin::-webkit-outer-spin-button,.stp .qin::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.stp .qin:focus{outline:none;background:#fff5f8}
 .stp .del{color:var(--red)}
 .checkbar{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:10px 14px;z-index:18}
 .checkbar .tot{font-size:22px;font-weight:700;color:var(--red)}
@@ -906,7 +909,7 @@ function productView({ id }){
     <div class="wrap">
       <div class="card" style="display:flex;justify-content:space-between;align-items:center">
         <div><div class="small muted">Delivery</div><b>${fee?money(fee):'Free'}</b></div>
-        ${!isOut(p)?`<div><div class="small muted" style="text-align:right;margin-bottom:4px">Quantity</div><div class="stp"><button id="qm">${ic('minus')}</button><span id="qn">1</span><button id="qp">${ic('plus')}</button></div></div>`:''}
+        ${!isOut(p)?`<div><div class="small muted" style="text-align:right;margin-bottom:4px">Quantity</div><div class="stp"><button id="qm">${ic('minus')}</button><input id="qn" class="qin" type="number" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" min="1" max="999" value="1" onfocus="this.select()"><button id="qp">${ic('plus')}</button></div></div>`:''}
       </div>
       ${p.description?`<div class="card"><b>Description</b><p style="white-space:pre-line;line-height:1.6;margin:8px 0 0">${esc(p.description)}</p></div>`:''}
       ${rel.length?`<div class="titleline">You may also like</div><div class="grid">${rel.map(pcard).join('')}</div>`:''}
@@ -924,8 +927,12 @@ function productView({ id }){
   if (imgs.length > 1) g.onscroll = () => { $('#gcnt').textContent = `${Math.round(g.scrollLeft/g.clientWidth)+1}/${imgs.length}`; };
   if (isOut(p)) return;
   const max = 999;
-  $('#qm').onclick = () => { qty = Math.max(1, qty-1); $('#qn').textContent = qty; };
-  $('#qp').onclick = () => { qty = Math.min(max, qty+1); $('#qn').textContent = qty; };
+  const qClamp = v => Math.min(max, Math.max(1, parseInt(v, 10) || 1));
+  $('#qm').onclick = () => { qty = qClamp(qty-1); $('#qn').value = qty; };
+  $('#qp').onclick = () => { qty = qClamp(qty+1); $('#qn').value = qty; };
+  $('#qn').oninput = e => { const v = parseInt(e.target.value, 10); if (v > 0) qty = Math.min(max, v); };
+  $('#qn').onchange = e => { qty = qClamp(e.target.value); e.target.value = qty; };
+  $('#qn').onkeydown = e => { if (e.key === 'Enter') e.target.blur(); };
   $('#addc').onclick = () => { if (addToCart(p.id, qty)) render(); };
   $('#buyn').onclick = () => { if (addToCart(p.id, qty, true)) setTab('cart'); };
 }
@@ -947,13 +954,19 @@ function cartTab(){
         <div class="inf"><div class="nm">${esc(l.p.name)}</div>
           ${l.p.is_preorder?`<div class="st pre">● Pre-order${l.p.eta_days?` · ~${l.p.eta_days} days`:''}</div>`:''}
           <div class="row"><div><div class="price">${lineMoney(price(l.p), l.qty)}</div><div class="small muted">${noPrice(l.p)?'':money(price(l.p))+' × '}${noPrice(l.p)?'Qty '+l.qty:l.qty}</div></div>
-            <div class="stp"><button class="${l.qty===1?'del':''}" onclick="chg(${l.p.id},-1)">${ic(l.qty===1?'trash':'minus')}</button><span>${l.qty}</span><button onclick="chg(${l.p.id},1)">${ic('plus')}</button></div></div>
+            <div class="stp"><button class="${l.qty===1?'del':''}" onclick="chg(${l.p.id},-1)">${ic(l.qty===1?'trash':'minus')}</button><input class="qin" type="number" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" min="0" max="999" value="${l.qty}" onfocus="this.select()" onkeydown="if(event.key==='Enter')this.blur()" onchange="setQ(${l.p.id},this.value)"><button onclick="chg(${l.p.id},1)">${ic('plus')}</button></div></div>
         </div></div>`).join('')}
       ${both?`<div class="note" style="margin-bottom:0">Your cart will become <b>2 orders</b>: normal items are delivered first, pre-order items when they arrive.</div>`:''}
     </div>`}
     ${like.length?`<div class="wrap"><div class="titleline">${ic('spark','color:var(--o2);fill:var(--o2);width:18px')} You May Also Like</div><div class="grid">${like.map(pcard).join('')}</div></div>`:''}
     ${lines.length?`<div class="checkbar"><div class="tot">${lines.some(l=>noPrice(l.p))?(total>0?money(total)+' <span class="small muted">+ price on Telegram</span>':'<span class="askp">Price on Telegram</span>'):money(total)+khrLine(total)}</div><button class="btn pri" onclick="go('checkout')">Checkout (${n})</button></div>`:''}`;
   if (lines.length) $('#view').classList.add('has-checkbar');
+}
+function setQ(id, v){
+  const n = parseInt(v, 10);
+  if (isNaN(n)) { render(); return; }
+  if (n <= 0) delete cart[id]; else cart[id] = Math.min(n, 999);
+  saveCart(); render();
 }
 function chg(id, d){
   const p = prod(id); const n = (cart[id]||0) + d;
